@@ -84,7 +84,11 @@ function CabinRow({ cabin }) {
                 <Menus.Button icon={<HiPencil />}>Редактировать</Menus.Button>
               </Modal.Open>
 
-              <Menus.Button onClick={handleCopy} icon={<HiSquare2Stack />}>
+              <Menus.Button
+                disabled={isCreating}
+                onClick={handleCopy}
+                icon={<HiSquare2Stack />}
+              >
                 Копировать
               </Menus.Button>
 

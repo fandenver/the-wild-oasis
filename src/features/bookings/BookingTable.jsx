@@ -22,7 +22,7 @@ function BookingTable() {
           <div>Даты</div>
           <div>Статус</div>
           <div style={{ fontSize: '1.4rem' }}>Сумма</div>
-          {/*<div></div>*/}
+          <div>⚙️</div>
         </Table.Header>
 
         <Table.Body

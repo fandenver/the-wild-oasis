@@ -67,7 +67,6 @@ export async function getBookingsAfterDate(date) {
 export async function getStaysAfterDate(date) {
   const { data, error } = await supabase
     .from('bookings')
-    // .select('*')
     .select('*, guests(fullName)')
     .gte('startDate', date)
     .lte('startDate', getToday());
@@ -109,7 +108,7 @@ export async function updateBooking(id, obj) {
 
   if (error) {
     console.error(error);
-    throw new Error('Бронирования не могут быть обновлены');
+    throw new Error('Бронирование не может быть обновлено');
   }
   return data;
 }
@@ -119,7 +118,7 @@ export async function deleteBooking(id) {
 
   if (error) {
     console.error(error);
-    throw new Error('Бронирования не могут быть удалены');
+    throw new Error('Бронирование не может быть удалено');
   }
   return data;
 }

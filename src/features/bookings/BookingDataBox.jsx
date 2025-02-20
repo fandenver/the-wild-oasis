@@ -1,23 +1,21 @@
-import styled from "styled-components";
-import { format, isToday } from "date-fns";
+import styled from 'styled-components';
+import { format, isToday } from 'date-fns';
 import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
-} from "react-icons/hi2";
+} from 'react-icons/hi2';
 
-import DataItem from "../../ui/DataItem";
-import { Flag } from "../../ui/Flag";
+import DataItem from '../../ui/DataItem';
+import { Flag } from '../../ui/Flag';
 
-import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 
 const StyledBookingDataBox = styled.section`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
-
   overflow: hidden;
 `;
 
@@ -45,7 +43,7 @@ const Header = styled.header`
   }
 
   & span {
-    font-family: "Sono";
+    font-family: 'Sono';
     font-size: 2rem;
     margin-left: 4px;
   }
@@ -76,10 +74,10 @@ const Price = styled.div`
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
 
-  background-color: ${(props) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
-  color: ${(props) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
+  background-color: ${props =>
+    props.isPaid ? 'var(--color-green-100)' : 'var(--color-yellow-100)'};
+  color: ${props =>
+    props.isPaid ? 'var(--color-green-700)' : 'var(--color-yellow-700)'};
 
   & p:last-child {
     text-transform: uppercase;
@@ -101,7 +99,6 @@ const Footer = styled.footer`
   text-align: right;
 `;
 
-// A purely presentational component
 function BookingDataBox({ booking }) {
   const {
     created_at,
@@ -125,16 +122,16 @@ function BookingDataBox({ booking }) {
         <div>
           <HiOutlineHomeModern />
           <p>
-            {numNights} nights in Cabin <span>{cabinName}</span>
+            {numNights} ночей в домике <span>{cabinName}</span>
           </p>
         </div>
 
         <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
+          {format(new Date(startDate), 'EEE, MMM dd yyyy')} (
           {isToday(new Date(startDate))
-            ? "Today"
+            ? 'Сегодня'
             : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
+          ) &mdash; {format(new Date(endDate), 'EEE, MMM dd yyyy')}
         </p>
       </Header>
 
@@ -142,7 +139,7 @@ function BookingDataBox({ booking }) {
         <Guest>
           {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
           <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
+            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} гостей` : ''}
           </p>
           <span>&bull;</span>
           <p>{email}</p>
@@ -159,26 +156,29 @@ function BookingDataBox({ booking }) {
           </DataItem>
         )}
 
-        <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
-          {hasBreakfast ? "Yes" : "No"}
+        <DataItem icon={<HiOutlineCheckCircle />} label="Завтрак включен?">
+          {hasBreakfast ? 'Yes' : 'No'}
         </DataItem>
 
         <Price isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+          <DataItem
+            icon={<HiOutlineCurrencyDollar />}
+            label={`Общая стоимость`}
+          >
             {formatCurrency(totalPrice)}
 
             {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
-              )} breakfast)`}
+              ` (${formatCurrency(cabinPrice)} домик + ${formatCurrency(
+                extrasPrice,
+              )} завтрак)`}
           </DataItem>
 
-          <p>{isPaid ? "Paid" : "Will pay at property"}</p>
+          <p>{isPaid ? 'Оплачено' : 'Будет оплачено на месте'}</p>
         </Price>
       </Section>
 
       <Footer>
-        <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+        <p>Booked {format(new Date(created_at), 'EEE, MMM dd yyyy, p')}</p>
       </Footer>
     </StyledBookingDataBox>
   );

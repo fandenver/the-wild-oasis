@@ -52,6 +52,8 @@ const Button = styled.button`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  justify-content: center;
 
   ${props => sizes[props.size]}
   ${props => variations[props.variation]}

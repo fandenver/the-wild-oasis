@@ -8,6 +8,7 @@ import FileInput from '../../ui/FileInput.jsx';
 import Textarea from '../../ui/Textarea.jsx';
 import { useCreateCabin } from './useCreateCabin.js';
 import { useEditCabin } from './useEditCabin.js';
+import SpinnerMini from '../../ui/SpinnerMini.jsx';
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -141,8 +142,28 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow>
-        <Button disabled={isWorking}>
-          {isEditSession ? 'Изменить домик' : 'Создать домик'}
+        <Button
+          style={
+            isWorking
+              ? {
+                  width: '128px',
+                  height: '45px',
+                }
+              : {}
+          }
+          disabled={isWorking}
+        >
+          {isEditSession ? (
+            !isWorking ? (
+              'Изменить домик'
+            ) : (
+              <SpinnerMini />
+            )
+          ) : !isWorking ? (
+            'Создать домик'
+          ) : (
+            <SpinnerMini />
+          )}
         </Button>
         <Button
           variation="secondary"
